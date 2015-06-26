@@ -1,0 +1,78 @@
+<title>ID.me PingPong Tracker</title>
+
+<br>
+
+<div class = "games_holder_l">
+	<div class = "full_head">
+		<h1>
+			<%= @player.name %>
+		</h1>
+		<h3>
+			ELO: <%= @player.elo %>
+		</h3>
+		<br>
+		<br>
+		<h3>
+			Wins: <%= @player.wins.count %>
+		</h3>
+		<h3>
+			Losses: <%= @player.lose.count%>
+		</h3>
+		<br>
+		<br>
+		<h4>
+			Date Joined: <%= @player.created_at.to_date %>
+		</h4>
+	</div>
+</div>
+<div class = "games_holder_r">
+	<div class = "left_head">
+		<p class = "text_header">
+			<%= @player.name %>'s Recent games
+		</p>
+	</div>
+	<div class = "left">
+		<table border = "1" class="table" style="text-align: center;">
+			<tr>
+				<th>Date</th>
+				<th>Opponent</th>
+				<th>Outcome</th>
+				<th><%= @player.name %>'s Score</th>
+				<th>Opponent's score</th>
+			</tr>
+			<% @player_games.each_with_index do |t, index| %>
+				<tr>
+					<td>
+						<%= t.created_at.to_date %>
+					</td>
+					<td>
+						<% if @wins.include?(t) %>
+							<%= link_to t.loser.name, player_url(t.loser_id) %>
+						<% else %>
+							<%= link_to t.winner.name, player_url(t.winner_id) %>
+						<% end %>
+					</td>
+					<% if @wins.include?(t)%>
+						<td style="color: green">Win</td>
+					<% else %>
+						<td style = "color: red">Loss</td>
+					<% end %>
+					<td>
+						<% if @wins.include?(t) %>
+							<%= t.winner_score %>
+						<% else %>
+							<%= t.loser_score %>
+						<% end %>
+					</td>
+					<td>
+						<% if @wins.include?(t) %>
+							<%= t.loser_score %>
+						<% else %>
+							<%= t.winner_score %>
+						<% end %>
+					</td>
+				</tr>
+			<% end %>
+		</table>
+	</div>
+</div>

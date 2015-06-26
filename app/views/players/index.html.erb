@@ -1,0 +1,60 @@
+<title>ID.me PingPong Tracker</title>
+<br>
+
+<div class="left_holder">
+	<div class="center">
+		<p class="text_header">All Players</p>
+		<p class="blue">Note: Ranking table now sorts based on ELO</p>
+		<% flash.each do |name, msg| %>
+			<div class="blue"><%= msg %></div>
+		<% end %>
+	</div>
+	<br>
+
+	<div class="left">
+		<table border = "1" class="table" style="text-align: center;">
+			<tr>
+				<th>Rank</th>
+				<th>Name</th>
+				<th>ELO</th>
+				<th>Change</th>
+				<th>Win Count</th>
+				<th>Lose Count</th>
+				<th>Challenges Sent</th>
+			</tr>
+			
+			<% @players_items.each_with_index do |t, index| %>
+				<tr>
+					<td><%= index+1 %></td>
+					<td><%= link_to t.name, player_url(t.id) %></td>
+					<td><%= t.elo %></td>
+					<td>
+						<% elo_change = t.read_attribute(:elo_change) %>
+						<% if elo_change > 0 %>
+							<div class = "green bold">▲<%= elo_change %></div>
+						<% elsif elo_change < 0 %>
+							<div class = "red bold">▼<%= elo_change.abs %></div>
+						<% else %>	
+							<div class = "blue bold">---<%# t.elo_change %></div>
+						<% end %>
+					</td>
+					<td><%= t.wins.count %></td>
+					<td><%= t.lose.count %></td>
+					<td><%= t.challenges.count %></td>
+				</tr>
+			<% end %>
+		</table>
+	</div>
+</div>
+
+<div class="right_holder">
+	<div class="center">
+		<br><br><br><br>	
+		<%= form_for Player.create do |form| %>
+		<%# form_tag("/players/add", :method => "post") do %>
+		<%= form.label :name %>
+		<%= form.text_field :name, placeholder: "Enter a player name" %>
+		<%= form.submit("Add player", :class => "btn btn-primary") %>
+		<% end %>
+	</div>
+</div>

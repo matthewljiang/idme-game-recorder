@@ -1,0 +1,172 @@
+@import "bootstrap";
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.bold {
+  font-weight:bold;
+}
+
+.blue {
+  color: #0066FF;
+}
+
+.green {
+  color: #009933;
+}
+
+.red {
+  color: #FF0000;
+}
+
+.center{
+  text-align:center;
+}
+
+.text_header{
+  font-weight:bold;
+  font-size:large;
+}
+
+.thin_border{
+  border-style: solid;
+  border-color: black;
+}
+
+.left{
+  margin-left:10%;
+  margin-right:10%;
+  width:80%;
+}
+
+.left_head{
+  width: 40%;
+  float: left;
+  margin-left: 10%;
+}
+
+.right_head{
+  width: 40%;
+  float: right;
+  text-align: right;
+  margin-right: 10%
+}
+
+.full_head{
+  width: 80%;
+  text-align: center;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.left_holder{
+  float:left;
+  height:600px;
+  overflow:scroll;
+  width:70%;
+}
+
+.right_holder{
+  float:right;
+  height:600px;
+  width:30%;
+}
+
+.games_holder_l{
+  float:left;
+  height:600px;
+  overflow:scroll;
+  width:20%;
+  margin-left:5%
+}
+
+.games_holder_r{
+  float:right;
+  height:600px;
+  overflow:scroll;
+  width:75%;
+  overflow:scroll;
+}
+
+.full_holder{
+  height: 600px;
+  width:80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.right_hidden {
+  float: right;
+}
+
+.left_hidden {
+  overflow: hidden;
+}
+
+#parent {
+  overflow: hidden;
+  width: 75px;
+}
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+#logo:hover{
+  color: #fff;
+  text-decoration: none;
+}
+
+/* footer */
+footer {
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 40px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #999;
+  width: 60%;
+}
+
+footer a {
+  color: #555;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 10px;
+}

@@ -1,0 +1,47 @@
+<title>ID.me PingPong Tracker</title>
+<br>
+
+	<div class="left_head">
+			<p class="text_header">All Games</p>
+	</div>
+	<div class = "right_head">
+		<%= link_to "Add A Game", games_path %>
+	</div>
+	<br>
+<div class="full_holder">
+<table border = "1" class="table" style="text-align: center;">
+			<tr>
+				<th>Date</th>
+				<th>Winner</th>
+				<th>Loser</th>
+				<th>Score</th>
+				<th>Challenger</th>
+				<th>Delete Game</th>
+			</tr>
+			<% @games_items.each do |t| %>
+				<tr>
+					<td><%= t.created_at.to_date %></td>
+					<td><%= link_to t.winner.name, player_url(t.winner_id) %>
+							<% if t.challenger.name == t.winner.name %>
+							 (C)
+							<% end %>
+					</td>
+					<td><%= link_to t.loser.name, player_url(t.loser_id) %>
+							<% if t.challenger.name == t.loser.name %>
+							 (C)
+							<% end %>
+					</td>
+					<td><%= t.winner_score %> - <%= t.loser_score %></td>
+					<td>
+						<div id="parent">
+							<div class="red right_hidden">▼<%= t.p2_change %></div>
+							<div class="green left_hidden">▲<%= t.p1_change %></div>
+						</div>
+					</td>
+					<td><%= link_to 'Delete', game_path(t.id), :method => :delete%></td>
+				</tr>
+			<% end %>
+		</table>
+		<%= will_paginate @games_items %>
+	</div>
+</div>

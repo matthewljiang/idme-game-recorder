@@ -1,0 +1,77 @@
+<title>ID.me PingPong Tracker</title>
+<br>
+
+<div class="games_holder_r">
+	<div class="left_head">
+			<p class="text_header">Recent Games</p>
+			<br>
+			<% flash.each do |name, msg| -%>
+				<div class="blue"><%= msg %></div>
+			<% end %>
+			<br>
+	</div>
+
+	<div class = "right_head">
+		<%= link_to "See All Games", "archive" %>
+	</div>
+	<br>
+
+	<div class="left">
+		<table border = "1" class="table" style="text-align: center;">
+			<tr>
+				<th>Date</th>
+				<th>Winner</th>
+				<th>Loser</th>
+				<th>Score</th>
+				<th style="width:100px">Change</th>
+				<th style="width:50px">Delete</th>
+			</tr>
+
+			<% @games_items.each_with_index do |t, index| %>
+				<tr>
+					<td><%= t.created_at.to_date %></td>
+					<td><%= link_to t.winner.name, player_url(t.winner_id) %>
+							<% if t.challenger.name == t.winner.name %>
+							 (C)
+							<% end %>
+					</td>
+					<td><%= link_to t.loser.name, player_url(t.loser_id) %>
+							<% if t.challenger.name == t.loser.name %>
+							 (C)
+							<% end %>
+					</td>
+					<td><%= t.winner_score %> - <%= t.loser_score %></td>
+					<td>
+						<div id="parent">
+							<div class="red right_hidden">▼<%= t.p2_change %></div>
+							<div class="green left_hidden">▲<%= t.p1_change %></div>
+						</div>
+					</td>
+					<td><%= link_to 'Delete', game_path(t.id), :method => :delete%></td>
+				</tr>
+			<% end %>
+		</table>
+	</div>
+</div>
+
+<div class="games_holder_l">
+	<div class="center">
+		<br><br><br><br>
+		<%= form_for Game.create do |form| %>
+			<%= form.label :winner_id %>
+			<%= form.select :winner_id, options_for_select(Player.all.collect {|p| [p.name, p.id]}), { prompt: 'Please select a player'} %>
+			<br>
+			<%= form.label :loser_id %>
+			<%= form.select :loser_id, options_for_select(Player.all.collect {|p| [p.name, p.id]}), { prompt: 'Please select a player'} %>
+			<br>
+			<%= form.label :challenger_id %>
+			<%= form.select :challenger_id, options_for_select(Player.all.collect {|p| [p.name, p.id]}), { prompt: 'Please select a player'} %>
+			<br>
+			<%= form.label :winner_score %>
+			<%= form.text_field :winner_score, placeholder: "Enter the winner's score" %>
+			<%= form.label :loser_score %>
+			<%= form.text_field :loser_score, placeholder: "Enter the loser's score" %>
+			<%= form.submit("Add game", :class => "btn btn-primary")%>
+		<% end %>
+	</div>
+</div>
