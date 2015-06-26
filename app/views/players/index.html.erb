@@ -28,16 +28,6 @@
 					<td><%= index+1 %></td>
 					<td><%= link_to t.name, player_url(t.id) %></td>
 					<td><%= t.elo %></td>
-					<td>
-						<% elo_change = t.read_attribute(:elo_change) %>
-						<% if elo_change > 0 %>
-							<div class = "green bold">▲<%= elo_change %></div>
-						<% elsif elo_change < 0 %>
-							<div class = "red bold">▼<%= elo_change.abs %></div>
-						<% else %>	
-							<div class = "blue bold">---<%# t.elo_change %></div>
-						<% end %>
-					</td>
 					<td><%= t.wins.count %></td>
 					<td><%= t.lose.count %></td>
 					<td><%= t.challenges.count %></td>

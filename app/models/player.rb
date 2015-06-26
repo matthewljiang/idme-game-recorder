@@ -10,14 +10,6 @@ class Player < ActiveRecord::Base
 		wins.count + lose.count
 	end
 
-	def reset_change
-		self.update_attribute(:elo_change, 0)
-	end
-
-	def update_change(num)
-		self.update_attribute(:elo_change, num)
-	end
-
 	def get_elo
 		return self.elo
 	end
